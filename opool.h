@@ -28,7 +28,7 @@ typedef unsigned int size_t;
 
 // Generic Object pool class
 template <class T, class Alloc = std::allocator<T>> class OPool
-{ 
+{
 private:
     OPool(OPool const &) = delete;
     void operator=(OPool const &x) = delete;
@@ -45,11 +45,13 @@ public:
     bool            isExpandable() const;
     bool            hasAvailable() const;
     bool            hasPrototype() const;
+    bool            hasAllocator() const;
     void            setMaxSize(const size_t maxSize);
     void            setExpandable(const bool expandable);
     virtual T*      getObject();
     virtual bool    freeObject(T* ptr);
 protected:
+    void            initialize(size_t size, bool expandable);
     T*              allocateObject();
     void            deallocateObject(T* ptr);
 protected:
@@ -58,6 +60,7 @@ protected:
     bool            mExpandable;
     T               mPrototype;
     bool            mHasPrototype;
+    bool            mHasAllocator;
     Alloc           mAllocator;
     std::list<T*>   mFree;
     std::list<T*>   mUsed;
@@ -70,19 +73,27 @@ template <class T, class Alloc> Alloc OPool<T,Alloc>::getAllocator() const     {
 template <class T, class Alloc> bool OPool<T,Alloc>::isExpandable() const      { return mExpandable; }
 template <class T, class Alloc> bool OPool<T,Alloc>::hasAvailable() const      { return !mFree.empty(); }
 template <class T, class Alloc> bool OPool<T,Alloc>::hasPrototype() const      { return mHasPrototype; }
+template <class T, class Alloc> bool OPool<T,Alloc>::hasAllocator() const      { return mHasAllocator; }
 
 // Setters
 template <class T, class Alloc> void OPool<T,Alloc>::setMaxSize(const size_t maxSize)        { mMaxSize = maxSize; }
 template <class T, class Alloc> void OPool<T,Alloc>::setExpandable(const bool expandable)    { mExpandable = expandable; }
 
-// Constructors
-template <class T, class Alloc> OPool<T,Alloc>::OPool(size_t size, bool expandable)
+// Initializer
+template <class T, class Alloc> void OPool<T,Alloc>::initialize(size_t size, bool expandable)
 {
-    // Setting initial size properties
+    // Setting initial properties
     mSize = 0;
     mMaxSize = size;
     mExpandable = expandable;
     mHasPrototype = false;
+    mHasAllocator = false;
+}
+
+// Constructors
+template <class T, class Alloc> OPool<T,Alloc>::OPool(size_t size, bool expandable)
+{
+    initialize(size,expandable);
 
     // Creating pool objects
     for(unsigned int i = 0; i < size; i++)
@@ -93,22 +104,43 @@ template <class T, class Alloc> OPool<T,Alloc>::OPool(size_t size, bool expandab
 
 template <class T, class Alloc> OPool<T,Alloc>::OPool(size_t size, bool expandable, Alloc allocator)
 {
-    OPool(size,expandable);
+    initialize(size,expandable);
+    mHasAllocator = true;
     mAllocator = allocator;
+
+    // Creating pool objects
+    for(unsigned int i = 0; i < size; i++)
+    {
+        allocateObject();
+    }
 }
 
 template <class T, class Alloc> OPool<T,Alloc>::OPool(size_t size, bool expandable, const T prototype)
 {
-    OPool(size,expandable);
-
+    initialize(size,expandable);
     mHasPrototype = true;
     mPrototype = prototype;
+
+    // Creating pool objects
+    for(unsigned int i = 0; i < size; i++)
+    {
+        allocateObject();
+    }
 }
 
 template <class T, class Alloc> OPool<T,Alloc>::OPool(size_t size, bool expandable, const T prototype, Alloc allocator)
 {
-    OPool(size,expandable,prototype);
+    initialize(size,expandable);
+    mHasPrototype = true;
+    mPrototype = prototype;
+    mHasAllocator = true;
     mAllocator = allocator;
+
+    // Creating pool objects
+    for(unsigned int i = 0; i < size; i++)
+    {
+        allocateObject();
+    }
 }
 
 // Destructor
