@@ -1,7 +1,7 @@
 # DFXObjectpool
   A generic object pool design
 
-### Core concepts:
+### Core concepts
 DFXObjectpool is a generic Object Pool that can be used with almost any type of objects.
 If you are not familiar with Object Pools, you can learn about them at the following URLs:   
 
@@ -35,7 +35,7 @@ if the objects are actually meant to be released when the program attempts to do
 the SOPool class. SOPool is derived from OPool, and provides all of its functionality, adding some extra features listed above.
 To use SOPool, you have to derive your objects from the interface class Poolable. Poolable is a basic skeleton with a few members,
 and virtual functions SOPool uses to implement it's extra functionality. 
-Deriving from poolable gives you the following possibilities:
+Deriving from Poolable gives you the following possibilities:
 - A member variable and functions to keep track of the state of your objects.
 - SOPool only accepts the release of an object, if it's state is set to inactive (mActive = false)
 - The virtual functions onGiven() and onRelease() you can override, to behave as "constructor" and "destructor"
@@ -51,9 +51,9 @@ the potentially expensive operations occuring when constructing the objects, and
 between your program and the operating system. The objects stored in the pool have a lifespan as long as the pool itself
 usually. OPool and SOPool will free all of its resources when they are destroyed, but will not reclaim any resources still
 pending, used by other parts of the program. This can lead to a memory leak, if the pool is intentionally destroyed, or goes
-out of scope, before all of its objects have been released back. In future versions I may provide options to fix this
+out of scope, before all of it's objects have been released back. In future versions I may provide options to fix this
 (such as shared_pointers), currently all you can do is to make sure to release all granted objects back to the pool yourself.
-You can check, if there are any pending objects by calling a function, which will throw an exception if that is the case.
+You can check, if there are any pending objects by calling a function, which will throw an exception if such objects exist.
 
 ### Memory management
 Please note that OPool and SOPool themselves do not implement low level memory management, such as taking care of memory
@@ -64,6 +64,20 @@ Until that you are free to use your own allocators (as long as they implement th
 here:  
 http://en.cppreference.com/w/cpp/memory/allocator).
 
+### Future plans
+I intent to work on this project further, adding more functionality, stability, support and comfort features. These future 
+modifications will be commited when they are trough test-phase. These modifications are experimental, as for the time being
+I lack the academical knowledge about the subject, and I can only rely on articles found on the Internet. If those ideas are
+proven to be dead-ends or misconceptions I will correct my mistakes accordingly.  
+Ideas I currently have in mind for the future:  
+- Making sure via smart pointers that no memory can leak, 
+  if not all objects are returned to the pool
+- Making the pool follow the singleton pattern, to
+  store all type-identical objects in the same pool
+  for the sake of effectiveness
+- Making the pool safe to use across different threads, 
+  when the objects are needed concurrently
+
 ### License
 This project (alongside with all my future work) is released under the terms of the GNU General Public License v3.0. 
 You can copy, modify and reuse it at your demand, as long as you release your code under the same license. You can find the
@@ -73,7 +87,8 @@ https://www.gnu.org/licenses/gpl-3.0.en.html
 ### Personal comments
 I will update the code as I work on it, and make modifications. I'm not an experienced programmer, and my work can (and most
 likely do) contain errors, mistakes and misconceptions. As I am still learning programming, trying to improve and widen my 
-knowledge, any comments, recommendations and advices are welcome, as long as they are constructive and helpful.
+knowledge, any comments, recommendations and advices are welcome, as long as they are constructive and helpful. You can contact
+me via e-mail, I will try to answer them as soon as I have the opportunity.  
 Thank you for your attention!
 
 ### Contact
