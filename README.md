@@ -18,7 +18,7 @@ Object pools complicate object lifetime, as objects obtained from and returned t
 destroyed at this time.  
 
 
-### Extra functionalities
+### Functionalities
 DFXObjectpool supports many different comfort features, such as:
 - Can be used with almost any type of objects
 - Size policies, such as initial size, growth permissions, temporary disabling of growth, etc.
@@ -40,7 +40,9 @@ Deriving from Poolable gives you the following possibilities:
 - SOPool only accepts the release of an object, if it's state is set to inactive (mActive = false)
 - The virtual functions onGiven() and onRelease() you can override, to behave as "constructor" and "destructor"
   (note: these functions are not invoked at actual construction and destruction, but you can use the to initialize
-  and reset your objects, for example clearing all the sensitive data you have stored in them)
+  and reset your objects, for example clearing all the sensitive data you have stored in them)  
+  
+Later I will provide some short examples for the usage of the pool and it's features.
 
 ### Motivation & Mechanism
 DFXObjectpool (like any other well designed object pools) can exponentially increase performance, when used correctly.
@@ -48,12 +50,13 @@ Object pools can save you a significant amount of CPU time, when your objects ar
 lifespan, and a frequent creation and destruction sequence. The pool previously allocates memory for your objects, 
 constructs them, and keeps them ready for future usage when you release them back to the pool. This way you can avoid
 the potentially expensive operations occuring when constructing the objects, and the huge amount of context-switching
-between your program and the operating system. The objects stored in the pool have a lifespan as long as the pool itself
-usually. OPool and SOPool will free all of its resources when they are destroyed, but will not reclaim any resources still
-pending, used by other parts of the program. This can lead to a memory leak, if the pool is intentionally destroyed, or goes
-out of scope, before all of it's objects have been released back. In future versions I may provide options to fix this
-(such as shared_pointers), currently all you can do is to make sure to release all granted objects back to the pool yourself.
-You can check, if there are any pending objects by calling a function, which will throw an exception if such objects exist.
+between your program and the operating system. Copy and assignment of the pool object is currently disabled. The objects 
+stored in the pool have a lifespan as long as the pool itself usually. OPool and SOPool will free all of its resources 
+when they are destroyed, but will not reclaim any resources still pending, used by other parts of the program. 
+This can lead to a memory leak, if the pool is intentionally destroyed, or goes out of scope, before all of it's objects 
+have been released back. In future versions I may provide options to fix this (such as shared_pointers), 
+currently all you can do is to make sure to release all granted objects back to the pool yourself. You can check, 
+if there are any pending objects by calling a function, which will throw an exception if such objects exist.
 
 ### Memory management
 Please note that OPool and SOPool themselves do not implement low level memory management, such as taking care of memory
@@ -77,6 +80,7 @@ Ideas I currently have in mind for the future:
   for the sake of effectiveness
 - Making the pool safe to use across different threads, 
   when the objects are needed concurrently
+- Making the pool exception-safe
 
 ### License
 This project (alongside with all my future work) is released under the terms of the GNU General Public License v3.0. 
@@ -96,4 +100,5 @@ Peter Gyulai
 peterskhan1997@gmail.com  
 Electric Engineer student at  
 Budapest University of Technology and Economics  
+Hungary  
 2016.11.09.  
