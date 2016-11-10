@@ -68,7 +68,7 @@ here:
 http://en.cppreference.com/w/cpp/memory/allocator).
 
 ### Future plans
-I intent to work on this project further, adding more functionality, stability, support and comfort features. These future 
+I intend to work on this project further, adding more functionality, stability, support and comfort features. These future 
 modifications will be commited when they are trough test-phase. These modifications are experimental, as for the time being
 I lack the academical knowledge about the subject, and I can only rely on articles found on the Internet. If those ideas are
 proven to be dead-ends or misconceptions I will correct my mistakes accordingly.  
