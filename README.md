@@ -39,7 +39,7 @@ Deriving from Poolable gives you the following possibilities:
 - A member variable and functions to keep track of the state of your objects.
 - SOPool only accepts the release of an object, if it's state is set to inactive (mActive = false)
 - The virtual functions onGiven() and onRelease() you can override, to behave as "constructor" and "destructor"
-  (note: these functions are not invoked at actual construction and destruction, but you can use the to initialize
+  (note: these functions are not invoked at actual construction and destruction, but you can use them to initialize
   and reset your objects, for example clearing all the sensitive data you have stored in them)  
   
 Later I will provide some short examples for the usage of the pool and it's features.
