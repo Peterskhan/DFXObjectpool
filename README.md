@@ -22,7 +22,7 @@ destroyed at this time.
 DFXObjectpool supports many different comfort features, such as:
 - Can be used with almost any type of objects
 - Size policies, such as initial size, growth permissions, temporary disabling of growth, etc.
-- A prototype can be set creation, so all objects in the pool will be the exact copy of the prototype at creation
+- A prototype can be set at creation, so all objects in the pool will be the exact copy of the prototype at creation
 - A function to check if there are objects not returned to the pool (useful to check, before the pool gets destroyed)
 - The pool uses an allocator to handle memory allocation for it's objects (default is std::allocator, but you can use your own)
 - A function to check if the pool currently has a free object to provide
