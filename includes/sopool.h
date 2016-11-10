@@ -20,8 +20,8 @@
 #ifndef SOPOOL_H
 #define SOPOOL_H
 
-#include "opool.h"
-#include "poolable.h"
+#include "includes/opool.h"
+#include "includes/poolable.h"
 
 
 // Smart Object pool class

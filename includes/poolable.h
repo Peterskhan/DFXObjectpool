@@ -34,12 +34,12 @@ protected:
     bool            mActive;
 };
 
-Poolable::Poolable()                            { mActive = false; }
-Poolable::~Poolable()                           {}
-bool Poolable::isActive()                       { return mActive; }
-void Poolable::setActive(const bool isActive)   { mActive = isActive; }
-void Poolable::onGiven()                        {}
-void Poolable::onReleased()                     {}
+inline Poolable::Poolable()                            { mActive = false; }
+inline Poolable::~Poolable()                           {}
+inline bool Poolable::isActive()                       { return mActive; }
+inline void Poolable::setActive(const bool isActive)   { mActive = isActive; }
+inline void Poolable::onGiven()                        {}
+inline void Poolable::onReleased()                     {}
 
 
 #endif // POOLABLE_H

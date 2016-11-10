@@ -19,7 +19,7 @@
 #include <iostream>
 #include <time.h>
 #include <string>
-#include "sopool.h"
+#include "includes/sopool.h"
 
 class Person
 {
@@ -54,7 +54,7 @@ public:
 };
 
 
-int main()
+int test()
 {
     clock_t start;
     clock_t end;
