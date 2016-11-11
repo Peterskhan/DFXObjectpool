@@ -171,6 +171,7 @@ template <class T, class Alloc> T* OPool<T,Alloc>::allocateObject()
     T* element = std::allocator_traits<Alloc>::allocate(mAllocator,1,0);        // Allocate object
     std::allocator_traits<Alloc>::construct(mAllocator,element,mPrototype);     // Construct object
 
+
     mFree.push_front(element);
     mSize++;
     return element;

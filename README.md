@@ -81,6 +81,7 @@ Ideas I currently have in mind for the future:
 - Making the pool safe to use across different threads, 
   when the objects are needed concurrently
 - Making the pool exception-safe
+- Handle non-copyable object types
 
 ### License
 This project (alongside with all my future work) is released under the terms of the GNU General Public License v3.0. 
