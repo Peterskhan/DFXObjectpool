@@ -1,5 +1,6 @@
 # DFXObjectpool
   A generic object pool design
+  _Note: This project is from my first year at university and is discontinued._
 
 ### Core concepts
 DFXObjectpool is a generic Object Pool that can be used with almost any type of objects.
@@ -69,7 +70,7 @@ http://en.cppreference.com/w/cpp/memory/allocator).
 
 ### Future plans
 I intend to work on this project further, adding more functionality, stability, support and comfort features. These future 
-modifications will be commited when they are trough test-phase. These modifications are experimental, as for the time being
+modifications will be commited when they are through test-phase. These modifications are experimental, as for the time being
 I lack the academical knowledge about the subject, and I can only rely on articles found on the Internet. If those ideas are
 proven to be dead-ends or misconceptions I will correct my mistakes accordingly.  
 Ideas I currently have in mind for the future:  
@@ -84,7 +85,7 @@ Ideas I currently have in mind for the future:
 - Handle non-copyable object types
 
 ### License
-This project (alongside with all my future work) is released under the terms of the GNU General Public License v3.0. 
+This project is released under the terms of the GNU General Public License v3.0. 
 You can copy, modify and reuse it at your demand, as long as you release your code under the same license. You can find the
 license in the LICENSE.md file, or visit the official page here:  
 https://www.gnu.org/licenses/gpl-3.0.en.html
@@ -99,7 +100,7 @@ Thank you for your attention!
 ### Contact
 Peter Gyulai  
 peterskhan1997@gmail.com  
-Electric Engineer student at  
+Electrical Engineering student at  
 Budapest University of Technology and Economics  
 Hungary  
 2016.11.09.  
